@@ -1,0 +1,376 @@
+<html>
+<HEAD>
+<title>iPoker Games</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0">
+<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/paper/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var deck=new Array; var hand=new Array(5); var hcrd=new Array(5); var hsut=new Array(5);
+var isPlaying=-1; var betn=1; var dpos=0; var crdts;
+/* ----------------------------------------------------------------------------------------- */
+function initdeck(){
+ crd=0;
+ 
+ for(i=0;i<4;i++){
+  if(i==0){st="clubs";} else if(i==1){st="heart";} else if(i==2){st="diamond";}else{st="spade";}
+  for(c=1;c<14;c++){
+   if(c==1){num="ace";}else if(c==11){num="jack";}
+   else if(c==12){num="queen";}else if(c==13){num="king";}else{num=c;}
+   deck[crd++]=st+"|"+num;
+  } //for c
+ }  //for i
+}
+function Bet(num){
+ if(isPlaying<0){
+	 
+  crdts=document.all.crd.innerText * 1;
+  if(num==5){
+   if(crdts>=5){betn=5;}
+   else{betn=crdts;}
+  }else{betn=betn+num;}
+  if((betn>5)||(betn>crdts)){betn=1;}
+  document.all.pbet.innerText=betn;
+  document.all.col1.className="txtblk";document.all.col2.className="txtblk"; document.all.col3.className="txtblk";
+  document.all.col4.className="txtblk"; document.all.col5.className="txtblk";
+  document.all.col11.className="txtblk";document.all.col21.className="txtblk";document.all.col31.className="txtblk";
+  document.all.col41.className="txtblk";document.all.col51.className="txtblk";
+  document.all.col12.className="txtwht";document.all.col22.className="txtwht";document.all.col32.className="txtwht";
+  document.all.col42.className="txtwht";document.all.col52.className="txtwht";
+  document.all.col13.className="txtblk";document.all.col23.className="txtblk";document.all.col33.className="txtblk";
+  document.all.col43.className="txtblk";document.all.col53.className="txtblk";
+  document.all.col14.className="txtwht";document.all.col24.className="txtwht";document.all.col34.className="txtwht";
+  document.all.col44.className="txtwht";document.all.col54.className="txtwht";
+  document.all.col15.className="txtblk";document.all.col25.className="txtblk";document.all.col35.className="txtblk";
+  document.all.col45.className="txtblk";document.all.col55.className="txtblk";
+  document.all.col16.className="txtwht";document.all.col26.className="txtwht";document.all.col36.className="txtwht";
+  document.all.col46.className="txtwht";document.all.col56.className="txtwht";
+  document.all.col17.className="txtblk";document.all.col27.className="txtblk";document.all.col37.className="txtblk";
+  document.all.col47.className="txtblk";document.all.col57.className="txtblk";
+  document.all.col18.className="txtwht";document.all.col28.className="txtwht";document.all.col38.className="txtwht";
+  document.all.col48.className="txtwht";document.all.col58.className="txtwht";
+  document.all.col19.className="txtblk";document.all.col29.className="txtblk";document.all.col39.className="txtblk";
+  document.all.col49.className="txtblk";document.all.col59.className="txtblk";
+  if(betn==1){document.all.col1.className="danger";
+   document.all.col11.className="danger";document.all.col12.className="danger";document.all.col13.className="danger";
+   document.all.col14.className="danger";document.all.col15.className="danger";document.all.col16.className="danger";
+   document.all.col17.className="danger";document.all.col18.className="danger";document.all.col19.className="danger";
+  }else if(betn==2){document.all.col2.className="danger";
+   document.all.col21.className="danger";document.all.col22.className="danger";document.all.col23.className="danger";
+   document.all.col24.className="danger";document.all.col25.className="danger";document.all.col26.className="danger";
+   document.all.col27.className="danger";document.all.col28.className="danger";document.all.col29.className="danger";
+  }else if(betn==3){document.all.col3.className="danger";
+   document.all.col31.className="danger";document.all.col32.className="danger";document.all.col33.className="danger";
+   document.all.col34.className="danger";document.all.col35.className="danger";document.all.col36.className="danger";
+   document.all.col37.className="danger";document.all.col38.className="danger";document.all.col39.className="danger";
+  }else if(betn==4){document.all.col4.className="danger";
+   document.all.col41.className="danger";document.all.col42.className="danger";document.all.col43.className="danger";
+   document.all.col44.className="danger";document.all.col45.className="danger";document.all.col46.className="danger";
+   document.all.col47.className="danger";document.all.col48.className="danger";document.all.col49.className="danger";
+  }else {document.all.col5.className="danger";
+   document.all.col51.className="danger";document.all.col52.className="danger";document.all.col53.className="danger";
+   document.all.col54.className="danger";document.all.col55.className="danger";document.all.col56.className="danger";
+   document.all.col57.className="danger";document.all.col58.className="danger";document.all.col59.className="danger";
+  }
+ }
+}
+
+
+
+function evalhand(num){
+ isFlush=-1; isStrt=1; isTrips=-1; isFours=-1; Pair=-1; Pair2=-1; isFull=-1;
+ mtch1=0;mtch2=0;mtch3=0;mtch4=0;mtch5=0;
+ document.all.row1.className="bgwht";document.all.row3.className="bgwht";document.all.row5.className="bgwht";
+ document.all.row2.className="bgblk";document.all.row4.className="bgblk";document.all.row6.className="bgblk";
+ document.all.row7.className="bgwht";document.all.row8.className="bgblk";document.all.row9.className="bgwht";
+ document.drwcrd.hold1.checked = false; document.drwcrd.hold2.checked = false;
+ document.drwcrd.hold3.checked = false; document.drwcrd.hold4.checked = false;
+ document.drwcrd.hold5.checked = false;
+ for(i=0;i<5;i++){
+  p = hand[i].indexOf("|");
+  s = hand[i].substring(0,p);
+  c = hand[i].substring(p+1,hand[i].length);
+  hcrd[i]=c; hsut[i]=s;
+  if(hcrd[i]=="ace"){hcrd[i]=14;} else if(hcrd[i]=="jack"){hcrd[i]=11;} else if(hcrd[i]=="queen"){hcrd[i]=12;}
+  else if(hcrd[i]=="king"){hcrd[i]=13;} else {hcrd[i]=hcrd[i]*1;}
+ }
+ for(i=4;i>=0;i--){ // bubble sort
+  for(j=0;j<4;j++){
+   if(hcrd[j]>=hcrd[j+1]){
+    tmp=hcrd[j];       tmp2=hsut[j];
+    hcrd[j]=hcrd[j+1]; hsut[j]=hsut[j+1];
+    hcrd[j+1]=tmp;     hsut[j+1]=tmp2;
+   }
+  }
+ }
+ for(i=4;i>0;i--){ if(hcrd[i]!=hcrd[0]+i){isStrt=-1;} }
+ if((hcrd[0]==2)&&(hcrd[1]==3)&&(hcrd[2]==4)&&(hcrd[3]==5)&&(hcrd[4]==14)){isStrt=1;}
+ if((hsut[0]==hsut[1])&&(hsut[0]==hsut[2])&&(hsut[0]==hsut[3])&&(hsut[0]==hsut[4])){isFlush=1;}
+ if((isStrt<0)&&(isFlush<0)){
+  mtch1=0;
+  for(i=0;i<5;i++){ if(i!=0){if(hcrd[0]==hcrd[i]){mtch1++;}}}
+  mtch2=0;
+  for(i=0;i<5;i++){ if(i!=1){if(hcrd[1]==hcrd[i]){mtch2++;}}}
+  mtch3=0;
+  for(i=0;i<5;i++){ if(i!=2){if(hcrd[2]==hcrd[i]){mtch3++;}}}
+  mtch4=0;
+  for(i=0;i<5;i++){ if(i!=3){if(hcrd[3]==hcrd[i]){mtch4++;}}}
+  mtch5=0;
+  for(i=0;i<5;i++){ if(i!=4){if(hcrd[4]==hcrd[i]){mtch5++;}}}
+  if((mtch1==3)||(mtch2==3)||(mtch3==3)||(mtch4==3)||(mtch5==3)){isFours=1;}
+  if((mtch1==2)||(mtch2==2)||(mtch3==2)||(mtch4==2)||(mtch5==2)){isTrips=1;}
+  if((mtch1+mtch2+mtch3+mtch4+mtch5)==8){isFull=1; isTrips=-1;}
+  if((mtch1+mtch2+mtch3+mtch4+mtch5)==4){Pair2=1;}
+  if((mtch1+mtch2+mtch3+mtch4+mtch5)==2){
+   cval=0;
+   if(mtch1==1){cval=hcrd[0];} if(mtch2==1){cval=hcrd[1];}
+   if(mtch3==1){cval=hcrd[2];} if(mtch4==1){cval=hcrd[3];}
+   if(cval>=10){Pair=1;}
+  }
+ } //end if(isStrt && isFlush)
+ tmp=0;
+ if(isFlush>0){tmp=5;}
+ if(isStrt>0){tmp=6;}
+ if((isFlush>0)&&(isStrt>0)){
+  if(hcrd[0]==10){tmp=1;}
+  else{tmp=2;}
+ }
+ if(isFull>0){tmp=4}
+ if(isFours>0){tmp=3;}
+ if(isTrips>0){tmp=7;}
+ if(Pair2>0){tmp=8;}
+ if(Pair>0){tmp=9;}
+ if(tmp==1){document.all.row1.className="success";}  if(tmp==2){document.all.row2.className="success";}
+ if(tmp==3){document.all.row3.className="success";}  if(tmp==4){document.all.row4.className="success";}
+ if(tmp==5){document.all.row5.className="success";}  if(tmp==6){document.all.row6.className="success";}
+ if(tmp==7){document.all.row7.className="success";}  if(tmp==8){document.all.row8.className="success";}
+ if(tmp==9){document.all.row9.className="success";}
+ if(num>0){endgame(tmp);}
+}
+/* ----------------------------------------------------------------------------------------- */
+function showcard(cnum){
+ p = hand[cnum].indexOf("|");
+ s = hand[cnum].substring(0,p);
+ c = hand[cnum].substring(p+1,hand[cnum].length);
+ if(cnum==0){document.images.card1.src="img/poker/"+s+c+".png";}
+ else if(cnum==1){document.images.card2.src="img/poker/"+s+c+".png";}
+ else if(cnum==2){document.images.card3.src="img/poker/"+s+c+".png";}
+ else if(cnum==3){document.images.card4.src="img/poker/"+s+c+".png";}
+ else{document.images.card5.src="img/poker/"+s+c+".png";}
+}
+function deal(){
+ if(isPlaying < 0){ // new game
+  dpos = 0;  isPlaying=1;
+  	
+  crdts=document.all.crd.innerText * 1;
+  crdts=crdts-betn;
+  document.all.crd.innerText = crdts;
+  for(i=0;i<500;i++){  //shuffle the cards(mix up the deck)
+   tmp = Math.round(Math.random()*51);  tmp2= Math.round(Math.random()*51);
+   stmp = deck[tmp];  deck[tmp] = deck[tmp2];  deck[tmp2] = stmp;
+  }
+//deck[0]="diamond|ace"; deck[1]="spade|ace"; deck[2]="heart|ace"; deck[3]="clubs|ace"; deck[4]="clubs|4";
+  for(i=0;i<5;i++){hand[i]=deck[dpos++];showcard(i);}
+  evalhand(-1);
+  document.all.msgs.innerText="Choose which cards to hold & hit 'Deal'";document.getElementById("cardhold").setAttribute("class", "showcards");
+  
+ }else{            // draw
+ 
+  if(!document.drwcrd.hold1.checked){hand[0]=deck[dpos++];showcard(0);}
+  if(!document.drwcrd.hold2.checked){hand[1]=deck[dpos++];showcard(1);}
+  if(!document.drwcrd.hold3.checked){hand[2]=deck[dpos++];showcard(2);}
+  if(!document.drwcrd.hold4.checked){hand[3]=deck[dpos++];showcard(3);}
+  if(!document.drwcrd.hold5.checked){hand[4]=deck[dpos++];showcard(4);}
+  evalhand(1);
+ }
+}
+function endgame(hndval){
+ isPlaying=-1;document.getElementById("cardhold").setAttribute("class", "hidecards");
+ if     (hndval==0){ win=0;       msg="Losing Hand.";}
+ else if(hndval==9){ win=betn;    msg="Pair of 10's or better";}
+ else if(hndval==8){ win=2*betn;  msg="Two Pairs";}
+ else if(hndval==7){ win=3*betn;  msg="Three of a Kind";}
+ else if(hndval==6){ win=4*betn;  msg="Straight";}
+ else if(hndval==5){ win=5*betn;  msg="Flush";}
+ else if(hndval==4){ win=6*betn;  msg="Full House";}
+ else if(hndval==3){ win=8*betn;  msg="Four of a Kind";}
+ else if(hndval==2){ win=10*betn; msg="Straight Flush";}
+ else if(hndval==1){ win=50*betn; msg="Royal Straight Flush"; }
+ crdts=crdts+win;
+ document.all.msgs.innerText=msg;
+ if(crdts==0){
+  alert("You are busted, my friend");
+  alert("Here's a loan so you can lose some more...");
+  crdts=50;
+ }
+ document.all.crd.innerText = crdts;
+ betn=0;Bet(1);
+}
+function Clickit(num){
+
+ if(isPlaying>0){
+  if(num==1){document.drwcrd.hold1.checked=!document.drwcrd.hold1.checked;}
+  if(num==2){document.drwcrd.hold2.checked=!document.drwcrd.hold2.checked;}
+  if(num==3){document.drwcrd.hold3.checked=!document.drwcrd.hold3.checked;}
+  if(num==4){document.drwcrd.hold4.checked=!document.drwcrd.hold4.checked;}
+  if(num==5){document.drwcrd.hold5.checked=!document.drwcrd.hold5.checked;}
+ }
+}
+function quit(){window.close();}
+/* ----------------------------------------------------------------------------------------- */
+initdeck();
+//  End -->
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script type="text/javascript" src="js/reflection.js"></script>
+</HEAD>
+<body>
+<div id="game-videopoker" class="container">
+
+
+<form name="drwcrd">
+<ul class="nav nav-pills">
+                <li class="active"><a href="#">Credits <span class="badge" id="crd">100</span></a></li>
+                <li><a href="index.html">Start Over <span class="badge"></span></a></li>
+              </ul>
+              
+
+<div id="msgs" class="well lead text-center">
+     Hit 'DEAL' to begin
+    </div>
+    
+    <div class="row cardholder">
+<div id="cards">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="chart_bdr" id="videopoker-playercards">
+    <tr>
+      <td class="chart_inside"><img src="img/poker/card.png" name="card1"  border=0 class="playercard reflect" onClick="Clickit(1);"></td>
+      <td class="chart_inside"><img src="img/poker/card.png" name="card2"  border=0 onClick="Clickit(2);" class="playercard reflect"></td>
+      <td class="chart_inside"><img src="img/poker/card.png" name="card3"  border=0 onClick="Clickit(3);" class="playercard reflect"></td>
+      <td class="chart_inside"><img src="img/poker/card.png" name="card4"  border=0 onClick="Clickit(4);" class="playercard reflect"></td>
+      <td class="chart_inside"><img src="img/poker/card.png" name="card5"  border=0 onClick="Clickit(5);" class="playercard reflect"></td>
+    </tr>
+    </table>
+    </div>
+    
+	<div id="holdhold" class="">    
+    <table width="100%" id="cardhold">
+    <tr>
+      <td class="chart_inside"><input type=checkbox name="hold1" id="hold1"><label for="hold1"></label></td>
+      <td class="chart_inside"><input type=checkbox name="hold2" id="hold2"><label for="hold2"></label></td>
+      <td class="chart_inside"><input type=checkbox name="hold3" id="hold3"><label for="hold3"></label></td>
+      <td class="chart_inside"><input type=checkbox name="hold4" id="hold4"><label for="hold4"></label></td>
+      <td class="chart_inside"><input type=checkbox name="hold5" id="hold5"><label for="hold5"></label></td>
+    </tr>
+  </table>
+  </div>
+  </div>
+  <div class="btn-group btn-group-justified">
+
+  <a href="javascript:Bet(1);" class="btn btn-primary">BET:<span id="pbet">1</span></a>
+    <a href="javascript:deal();" class="btn btn-info">DEAL</a>
+  <a href="javascript:Bet(5);" class="btn btn-warning">MAX BET (5)</a>
+  </div>
+  
+  
+</form>
+
+<div id="game-videopoker-points">
+<table  class="chart_bdr table table-condensed">
+  <tr >
+    <td class="chart_inside">Hand</td>
+    <td class="chart_inside" id="col1">Bet 1</td>
+    <td  class="chart_inside" id="col2">Bet 2</td>
+    <td  class="chart_inside" id="col3">Bet 3</td>
+    <td  class="chart_inside" id="col4">Bet 4</td>
+    <td  class="chart_inside" id="col5">Bet 5</td>
+  </tr>
+  <tr id="row1">
+    <td class="chart_inside">Royal  Flush </td>
+    <td class="chart_inside" id="col11">50</td>
+    <td class="chart_inside" id="col21">100</td>
+    <td class="chart_inside" id="col31">150</td>
+    <td class="chart_inside" id="col41">200</td>
+    <td class="chart_inside" id="col51">250</td>
+  </tr>
+  <tr id="row2" class="bgblk">
+    <td class="chart_inside">Straight Flush</td>
+    <td class="chart_inside" id="col12">10</td>
+    <td class="chart_inside" id="col22">20</td>
+    <td class="chart_inside" id="col32">30</td>
+    <td class="chart_inside" id="col42">40</td>
+    <td class="chart_inside" id="col52">50</td>
+  </tr>
+  <tr  class="bgwht" id="row3">
+    <td class="chart_inside">4 of a Kind</td>
+    <td  class="chart_inside" id="col13">8</td>
+    <td  class="chart_inside" id="col23">16</td>
+    <td  class="chart_inside" id="col33">24</td>
+    <td  class="chart_inside" id="col43">32</td>
+    <td  class="chart_inside" id="col53">40</td>
+  </tr>
+  <tr class="bgblk" id="row4">
+    <td class="chart_inside">Full House</td>
+    <td class="chart_inside" id="col14">6</td>
+    <td class="chart_inside" id="col24">12</td>
+    <td class="chart_inside" id="col34">18</td>
+    <td class="chart_inside" id="col44">24</td>
+    <td class="chart_inside" id="col54">30</td>
+  </tr>
+  <tr  class="bgwht" id="row5">
+    <td class="chart_inside">Flush</td>
+    <td  class="chart_inside" id="col15">5</td>
+    <td  class="chart_inside" id="col25">10</td>
+    <td  class="chart_inside" id="col35">15</td>
+    <td  class="chart_inside" id="col45">20</td>
+    <td  class="chart_inside" id="col55">25</td>
+  </tr>
+  <tr class="bgblk" id="row6">
+    <td class="chart_inside">Straight</td>
+    <td class="chart_inside" id="col16">4</td>
+    <td class="chart_inside" id="col26">8</td>
+    <td class="chart_inside" id="col36">12</td>
+    <td class="chart_inside" id="col46">16</td>
+    <td class="chart_inside" id="col56">20</td>
+  </tr>
+  <tr  class="bgwht" id="row7">
+    <td class="chart_inside">3 of a Kind</td>
+    <td  class="chart_inside" id="col17">3</td>
+    <td  class="chart_inside" id="col27">6</td>
+    <td  class="chart_inside" id="col37">9</td>
+    <td  class="chart_inside" id="col47">12</td>
+    <td  class="chart_inside" id="col57">15</td>
+  </tr>
+  <tr class="bgblk" id="row8">
+    <td class="chart_inside">2 Pair</td>
+    <td class="chart_inside" id="col18">2</td>
+    <td class="chart_inside" id="col28">4</td>
+    <td class="chart_inside" id="col38">6</td>
+    <td class="chart_inside" id="col48">8</td>
+    <td class="chart_inside" id="col58">10</td>
+  </tr>
+  <tr  class="bgwht" id="row9">
+    <td class="chart_inside">Pair 10's +</td>
+    <td  class="chart_inside" id="col19">1</td>
+    <td  class="chart_inside" id="col29">2</td>
+    <td  class="chart_inside" id="col39">3</td>
+    <td  class="chart_inside" id="col49">4</td>
+    <td  class="chart_inside" id="col59">5</td>
+  </tr>
+</table>
+
+</div>
+</div>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+</body>
+</html>

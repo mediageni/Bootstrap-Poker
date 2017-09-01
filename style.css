@@ -1,0 +1,122 @@
+#game-videopoker #crd {
+	font-size:16px;
+	text-align:center;
+
+}
+#game-videopoker #msgs {
+
+	text-align: center;
+}
+#game-videopoker #game-videopoker-points {
+
+	-webkit-border-radius: 4px;
+}
+#game-videopoker #game-videopoker-points table {
+	padding:1px;
+	opacity:1;
+}
+#game-videopoker #game-videopoker-buttons {
+
+}
+#game-videopoker #game-videopoker-points td {
+}
+#game-videopoker table#cardhold .hold {
+	background-color:#ffcc00;
+	-webkit-border-radius: 4px;
+}
+.hidecards {
+	display:none
+}
+.showcards {
+	display:block
+}
+#game-videopoker table#cardhold {
+	margin-top:-26px;
+}
+.playercard {margin:0 auto}
+#game-videopoker input {
+}
+
+#game-videopoker #videopoker-playercards td {
+	text-align:center;
+}
+#game-videopoker #game-videopoker-buttons {
+}
+#game-videopoker #holdhold {
+    position: absolute;
+    top: 10px;
+    width: 100%;
+}
+#game-videopoker #cards {
+	/* [disabled]width: 320px; */
+	position: relative;
+
+}
+#game-videopoker #cards img {
+}
+#game-videopoker .chart_inside {
+	text-align:center;
+}
+#game-videopoker .chart_bdr {
+}
+#game-videopoker .bgred {
+		background: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(255, 228, 45, 0.5)), to(rgba(0, 55, 0, 0.8)));
+}
+#cardhold input {}
+#game-videopoker .bgwht {
+}
+#game-videopoker .bgblk {
+}
+#game-videopoker .txtblu {
+
+	background: -webkit-gradient(linear, 0% 0%, 0% 95%, from(rgba(0, 55, 0, 0.3)), to(rgba(0, 55, 0, 0.8)));
+}
+
+#col1,#col2,#col3,#col4,#col5 {}
+/* AQUA BUTTONS */
+
+
+.aqua {
+	background-color: rgba(60, 132, 198, 0.8);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(28, 91, 155, 0.8)), to(rgba(108, 191, 255, .9)));
+	background-image: -moz-linear-gradient(rgba(28, 91, 155, 0.8) 0%, rgba(108, 191, 255, .9) 90%);
+	border-top-color: #8ba2c1;
+	border-right-color: #5890bf;
+	border-bottom-color: #4f93ca;
+	border-left-color: #768fa5;
+	-webkit-box-shadow: rgba(66, 140, 240, 0.5) 0px 10px 16px;
+	-moz-box-shadow: rgba(66, 140, 240, 0.5) 0px 10px 16px; /* FF 3.5+ */
+}
+.white {
+	background-color: rgba(60, 132, 198, 0.8);
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 90%, from(rgba(255, 255, 255, 0.8)), to(rgba(255, 255, 255, .9)));
+	border-top-color: #ffffff;
+	border-right-color: #ffffff;
+	border-bottom-color: #ffffff;
+	border-left-color: #ffffff;
+	-webkit-box-shadow: rgba(255, 255, 255, 0.5) 0px 10px 16px;
+}
+.aqua:hover {
+	text-shadow: rgb(255, 255, 255) 0px 0px 5px;
+}
+.orange {
+	background-color: #ee5526;
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 85%, from(rgba(246, 132, 36, 0.8)), to(rgba(239, 97, 49, 0.9)));
+	background-image: -moz-linear-gradient(rgba(246, 132, 36, 0.8) 0%, rgba(239, 97, 49, 0.9) 85%);
+	border-top-color: #f7a250;
+	border-right-color: #f7a050;
+	border-bottom-color: #ef925e;
+	border-left-color: #f6a460;
+	-webkit-box-shadow: rgba(237, 96, 46, 0.5) 0px 10px 16px;
+	-moz-box-shadow: rgba(237, 96, 46, 0.5) 0px 10px 16px;
+}
+update input[type=button] {
+	appearance: push-button; /* expected from UA defaults */
+}
+
+.mozaqua:hover {
+	text-shadow: rgb(255, 255, 255) 0px 0px 5px;
+}
+.danger, .success {opacity:0.8}
+
+div.cardholder {position:relative}

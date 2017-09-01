@@ -1,2 +1,2 @@
 # Bootstrap-Poker
-A bootstrap poker game
+A bootstrap poker game by ScriptGeni.com
